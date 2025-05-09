@@ -34,7 +34,7 @@ Originally titled "Red dot thorny journey through the realms of time: random wal
 ## 🎬 Demo
 
 <p align="center">
-    <video src="assets/demo.mp4" width="550" controls autoplay loop>
+    <video src="https://github.com/Edmon02/red-dot-thorny-journey/blob/main/assets/demo.mp4" width="550" controls autoplay loop>
       Your browser does not support the video tag.
     </video>
 </p>
