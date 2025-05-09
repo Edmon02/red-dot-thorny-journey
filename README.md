@@ -55,7 +55,7 @@ Originally titled "Red dot thorny journey through the realms of time: random wal
 brew install sdl2
 
 # Compile with pkg-config
-gcc -o orbital_pathways orbital_pathways.c $(pkg-config --cflags --libs sdl2) -lm
+gcc -o thorny_journey thorny_journey.c $(pkg-config --cflags --libs sdl2) -lm
 ```
 
 #### Linux:
@@ -64,13 +64,13 @@ gcc -o orbital_pathways orbital_pathways.c $(pkg-config --cflags --libs sdl2) -l
 sudo apt-get install libsdl2-dev
 
 # Compile
-gcc -o orbital_pathways orbital_pathways.c $(sdl2-config --cflags --libs) -lm
+gcc -o thorny_journey thorny_journey.c $(sdl2-config --cflags --libs) -lm
 ```
 
 #### Windows (with MinGW):
 ```bash
 # After installing SDL2 development libraries
-gcc -o orbital_pathways orbital_pathways.c -IC:/path/to/SDL2/include -LC:/path/to/SDL2/lib -lSDL2main -lSDL2 -lm
+gcc -o thorny_journey thorny_journey.c -IC:/path/to/SDL2/include -LC:/path/to/SDL2/lib -lSDL2main -lSDL2 -lm
 ```
 
 ## 🎮 Usage
@@ -78,7 +78,7 @@ gcc -o orbital_pathways orbital_pathways.c -IC:/path/to/SDL2/include -LC:/path/t
 After compilation, simply run the executable:
 
 ```bash
-./orbital_pathways
+./thorny_journey
 ```
 
 Controls:
