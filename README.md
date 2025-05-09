@@ -33,7 +33,11 @@ Originally titled "Red dot thorny journey through the realms of time: random wal
 
 ## 🎬 Demo
 
-![Demo Video](https://github.com/Edmon02/red-dot-thorny-journey/blob/main/assets/reddot-compressed.mp4)
+<p align="center">
+    <video src="assets/demo.mp4" width="550" controls autoplay loop>
+      Your browser does not support the video tag.
+    </video>
+</p>
 
 ## 🛠️ Installation
 
