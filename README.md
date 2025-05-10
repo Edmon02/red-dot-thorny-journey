@@ -32,8 +32,7 @@ The visual elements include:
 Originally titled "Red dot thorny journey through the realms of time: random walk shaped by overlap events", this implementation faithfully reproduces the mathematical beauty of the original Wolfram code in high-performance C.
 
 ## 🎬 Demo  
-
-[![Demo Video](https://img.youtube.com/vi/eAUD9P5aRsc/0.jpg)](https://www.youtube.com/watch?v=eAUD9P5aRsc)
+https://github.com/user-attachments/assets/00df4eaf-e318-4cc3-87ca-60934e82bb62
 
 ## 🛠️ Installation
 
