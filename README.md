@@ -115,10 +115,82 @@ deltaList = RandomReal[{-0.5, 0.5}, Length[rList]]/60;
 radiiList = (30 + rList^2/10000)/2;
 center    = {250, 250};
 trailLen  = 33;
+
 DynamicModule[{redIdx = 1, inactiveSet = {}},
  Manipulate[
   Module[{angles, posRed, overlaps, available, newIdx, blackDisks, redDisk},
-   ...
+   
+   (* compute angles and red circle position *)
+   angles = (f + 9000)*deltaList;
+   posRed  = center + rList[[redIdx]]*{Cos[angles[[redIdx]]], Sin[angles[[redIdx]]]};
+   
+   (* find overlapping circles *)
+   overlaps = Select[
+     Range[Length[rList]],
+     # != redIdx &&
+     EuclideanDistance[
+       posRed,
+       center + rList[[#]]*{Cos[angles[[#]]], Sin[angles[[#]]]}
+     ] < radiiList[[redIdx]] + radiiList[[#]] &
+   ];
+   
+   (* transfer red only to new circles, never back while overlapping *)
+   available = Complement[overlaps, inactiveSet];
+   If[available =!= {},
+     (* transfer to first new overlap *)
+     newIdx      = First[available];
+     inactiveSet = Append[inactiveSet, redIdx];
+     redIdx      = newIdx,
+     (* if no overlaps, reset for next event *)
+     If[overlaps === {}, inactiveSet = {}]
+   ];
+   
+   (* build disk primitives *)
+   blackDisks = MapThread[
+     Disk[
+       center + #1*{Cos[#2], Sin[#2]},
+       #3
+     ] &,
+     {Delete[rList,   redIdx],
+      Delete[angles,  redIdx],
+      Delete[radiiList, redIdx]}
+   ];
+   redDisk = Disk[
+     center + rList[[redIdx]]*{Cos[angles[[redIdx]]], Sin[angles[[redIdx]]]},
+     radiiList[[redIdx]]
+   ];
+   
+   (* render trails, spokes, and disks *)
+   Graphics[
+     Join[
+       Table[
+         {
+           Opacity[(trailLen - k)/trailLen],
+           AbsoluteThickness[1], White,
+           MapThread[
+             Circle[
+               center + #1*{Cos[#2 - k #3], Sin[#2 - k #3]},
+               #4
+             ] &,
+             {rList, angles, deltaList, radiiList}
+           ]
+         },
+       {k, 1, trailLen}],
+       {
+         {AbsoluteThickness[3], White,
+          MapThread[
+            Line[{center, center + #1*{Cos[#2], Sin[#2]}}] &,
+            {rList, angles}
+          ]
+         },
+         {EdgeForm[{AbsoluteThickness[3], White}], FaceForm[Black], blackDisks},
+         {EdgeForm[{AbsoluteThickness[3], White}], FaceForm[Red],   redDisk}
+       }
+     ],
+     PlotRange   -> {{-100, 600}, {-100, 600}},
+     Background  -> Black,
+     ImageSize   -> 550
+   ]
   ],
   {f, 0, 10000, Animator,
      AnimationRate   -> 30,
